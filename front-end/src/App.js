@@ -1,6 +1,5 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { Button, FormControl, Input } from "@mui/material";
 import Product from "./Product";
 import Error from "./Error";
 import axios from "axios";
@@ -40,7 +39,7 @@ function App() {
 
       // wait half a second
       await new Promise((resolve) => setTimeout(resolve, 500));
-      const res = await axios.put(`/api/cart/${id}/${quantity}`);
+      await axios.put(`/api/cart/${id}/${quantity}`);
 
       await fetchCart();
     } catch (err) {

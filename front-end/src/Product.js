@@ -1,14 +1,4 @@
-import {
-  Button,
-  Card,
-  Checkbox,
-  Dialog,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-  Typography,
-} from "@mui/material";
-import axios from "axios";
+import { Button, Card, Dialog, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 // const { addProducts } = require("./add_products.js");
 
@@ -40,20 +30,6 @@ function Product(props) {
   const updateCart = props.updateCart;
 
   const [adding, setAdding] = useState(false);
-
-  const addToCart = async () => {
-    try {
-    } catch (err) {
-      setError(err);
-    }
-  };
-
-  const removeFromCart = async (id) => {
-    try {
-    } catch (err) {
-      setError(err);
-    }
-  };
 
   const updateQuantity = async () => {
     try {
