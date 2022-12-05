@@ -21,7 +21,6 @@ function Product(props) {
   const [quantity, setQuantity] = useState(originalQuantity);
 
   useEffect(() => {
-    originalQuantity = 0;
     setQuantity(originalQuantity);
   }, [props.cart]);
 
