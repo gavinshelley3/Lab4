@@ -3,7 +3,6 @@ const axios = require("axios");
 const express = require("express");
 const bodyParser = require("body-parser");
 const { getDb } = require("./database");
-var mongo = require("mongodb");
 const { addProducts } = require("./add_products");
 const app = express();
 
