@@ -1,5 +1,5 @@
 const axios = require("axios");
-const products = require("./products.js");
+const products = require("./sampleproducts.js");
 
 const baseURL = "http://localhost:3000";
 

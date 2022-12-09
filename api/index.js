@@ -4,11 +4,22 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { getDb } = require("./database");
 const { addProducts } = require("./add_products");
+const { cloneDeep } = require("lodash");
+const sampleProducts = require("./sampleproducts");
 const app = express();
 
-groceryStore = [];
+console.log("hey there!");
 
-groceryCart = [];
+let groceryStore = sampleProducts.map((product, index) => {
+  // index as a string
+  let id = index.toString();
+  return {
+    id,
+    ...product,
+  };
+});
+
+let groceryCart = [];
 
 app.use(
   bodyParser.urlencoded({
@@ -19,12 +30,12 @@ app.use(
 app.use(bodyParser.json());
 
 app.get("/api/products", async (req, res) => {
-  products = groceryStore;
+  const products = groceryStore;
   res.status(200).json(products);
 });
 
 app.get("/api/products/:id", async (req, res) => {
-  product = groceryStore.find((product) => {
+  let product = groceryStore.find((product) => {
     return product.id === req.params.id;
   });
   if (product) {
@@ -53,9 +64,13 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
+app.get("/api/utterstonks", async (req, res) => {
+  res.status(200).json({});
+});
+
 app.put("/api/products/:id/:quantity", async (req, res) => {
-  product = groceryStore.find((product) => {
-    item = product.id === req.params.id;
+  let product = groceryStore.find((product) => {
+    let item = product.id === req.params.id;
     if (item) {
       product.quantity = req.params.quantity;
 
@@ -73,7 +88,7 @@ app.put("/api/products/:id/:quantity", async (req, res) => {
 });
 
 app.delete("/api/products/:id", async (req, res) => {
-  product = groceryStore.find((product) => {
+  let product = groceryStore.find((product) => {
     return product.id === req.params.id;
   });
   if (product) {
@@ -87,7 +102,7 @@ app.delete("/api/products/:id", async (req, res) => {
 });
 
 app.get("/api/cart", async (req, res) => {
-  products = groceryCart;
+  let products = groceryCart;
   res.status(200).json(products);
 });
 
@@ -143,12 +158,21 @@ app.put("/api/cart/:id/:quantity", async (req, res) => {
     }
     res.status(200).json(product);
   } else {
-    res.status(404).send("Product not found");
+    groceryCart.push({
+      id: req.params.id,
+      quantity: quantity,
+    });
+
+    let product = groceryCart.find((product) => {
+      return product.id === req.params.id;
+    });
+
+    res.status(200).json(product);
   }
 });
 
 app.delete("/api/cart/:id", async (req, res) => {
-  product = groceryCart.find((product) => {
+  let product = groceryCart.find((product) => {
     return product.id === req.params.id;
   });
   if (product) {

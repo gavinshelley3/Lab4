@@ -73,6 +73,7 @@ function App() {
               <Stack spacing={2}>
                 {store.map((product) => (
                   <Product
+                    id={product.id}
                     key={product.id}
                     product={product}
                     setError={setError}
@@ -94,6 +95,7 @@ function App() {
 
                   return (
                     <Product
+                      id={product.id}
                       key={cartRecord.id}
                       product={product}
                       setError={setError}

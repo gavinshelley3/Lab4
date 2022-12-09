@@ -18,13 +18,15 @@ function Product(props) {
     originalQuantity = isInCart.quantity;
   }
 
+  console.log(props);
+
   const [quantity, setQuantity] = useState(originalQuantity);
 
   useEffect(() => {
     setQuantity(originalQuantity);
   }, [props.cart]);
 
-  const id = props.product.id;
+  const id = props.id;
   const product = props.product;
   const setError = props.setError;
   const updateCart = props.updateCart;
@@ -34,7 +36,7 @@ function Product(props) {
   const updateQuantity = async () => {
     try {
       setAdding(true);
-
+      console.log(id);
       await updateCart(id, quantity);
       setAdding(false);
       setDialogOpen(false);
